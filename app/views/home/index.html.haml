@@ -1,0 +1,6 @@
+.hero-unit.welcom
+  %header
+    %h1 Bits n Bytes
+    %p A notes template management app.
+  - unless current_user
+    = link_to "Login with Google", '/auth/google_oauth2', class: 'btn btn-large btn-primary'

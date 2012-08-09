@@ -1,0 +1,18 @@
+.row-fluid.show-grid
+  .well.span4
+    = link_to new_note_path, class: 'btn btn-primary' do
+      %i.icon-plus.icon-white
+      Add a Note
+    %h3 Notes
+    %ul.nav.nav-list#notes
+      = render @categories
+  .span8
+    %header.hero-unit
+      %h2 Preview
+    .sub-nav
+      %ul.nav.nav-pills
+        %li.btn-group
+          %button.btn.btn-primary#copy{:data => {:target => '#description'}} Copy
+        %li.btn-group
+          %button.btn#clear{:data => {:target => '#description'}} Clear
+    %textarea.uneditable-textarea.span12{:rows => '28', :readonly => true}

@@ -1,0 +1,9 @@
+%li{:data => {:id => note.id}}
+  %span.btn-group
+    = link_to edit_note_path(note), :class => 'edit btn btn-mini' do
+      %i.icon-edit
+      edit
+    = link_to note, :method => :delete, :class => 'delete btn btn-mini btn-danger' do
+      %i.icon-trash.icon-white
+      delete
+  = link_to note.title, note
