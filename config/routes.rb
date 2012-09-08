@@ -1,6 +1,8 @@
 BnbTest::Application.routes.draw do
   resources :categories, only: :index
-  resources :notes
+  resources :notes do
+    put 'star', :on => :member, :as => 'star'
+  end
 
   root to: 'home#index'
   match 'about', to: 'home#about', as: 'about'

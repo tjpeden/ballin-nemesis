@@ -3,11 +3,13 @@ class Note
   
   field :title
   field :content
-  field :star, type: Boolean
+  field :star, type: Boolean, default: false
 
   belongs_to :category
 
-  default_scope asc(:title)
+  default_scope where(star: false).asc(:title)
+
+  scope :starred, where(star: true)
 
   def category_name
     category.try(:name)

@@ -3,6 +3,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
+    @starred = Note.starred
     @categories = Category.all
 
     respond_to do |format|
@@ -12,7 +13,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   def show
-    @note = Note.find(params[:id])
+    @note = Note.unscoped.find(params[:id])
 
     respond_to do |format|
       format.json { render json: @note }
@@ -30,7 +31,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1/edit
   def edit
-    @note = Note.find(params[:id])
+    @note = Note.unscoped.find(params[:id])
   end
 
   # POST /notes
@@ -48,7 +49,7 @@ class NotesController < ApplicationController
 
   # PUT /notes/1
   def update
-    @note = Note.find(params[:id])
+    @note = Note.unscoped.find(params[:id])
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
@@ -59,14 +60,25 @@ class NotesController < ApplicationController
     end
   end
 
+  # PUT /notes/1/star
+  def star
+    @note = Note.unscoped.find(params[:id])
+    @note.update_attributes(params[:note])
+
+    @starred = Note.starred
+    @categories = Category.all
+    render partial: 'side'
+  end
+
   # DELETE /notes/1
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
-    @categories = Category.all
 
+    @starred = Note.starred
+    @categories = Category.all
     respond_to do |format|
-      format.html { render @categories }
+      format.html { render partial: 'side' }
     end
   end
 end

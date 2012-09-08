@@ -1,9 +1,11 @@
 %li{:data => {:id => note.id}}
-  %span.btn-group
-    = link_to edit_note_path(note), :class => 'edit btn btn-mini' do
+  .btn-group
+    = link_to note, :class => 'delete btn btn-mini btn-danger', :data => {:remote => true, :confirm => 'Are you sure?', :method => 'delete', :type => 'html', :target => '#notes'} do
+      %i.icon-trash
+      delete
+    = link_to edit_note_path(note), :class => 'edit btn btn-mini btn-info' do
       %i.icon-edit
       edit
-    = link_to note, :method => :delete, :class => 'delete btn btn-mini btn-danger' do
-      %i.icon-trash.icon-white
-      delete
-  = link_to note.title, note
+    = link_to star_note_path(note), :class => 'star btn btn-mini', :data => {:remote => true, :method => 'put', :type => 'html', :params => "note[star]=#{!note.star}", :target => '#notes'} do
+      %i{:class => note.star ? 'icon-star' : 'icon-star-empty'}
+    = link_to note.title, note, :class => 'show btn btn-mini btn-success', :title => note.title, :data => {:remote => true, :target => '#description', :type => 'json'}

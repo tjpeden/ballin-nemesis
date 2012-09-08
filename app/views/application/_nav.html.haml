@@ -5,7 +5,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.brand(href="#") MyApp
+      %a.brand(href="#") Bits n Bytes
       .container.nav-collapse
         %ul.nav
           - if current_user
@@ -14,7 +14,7 @@
                 Notes
                 %b.caret
               %ul.dropdown-menu
-                %li= link_to 'Previews', notes_path
+                %li= link_to 'Preview', notes_path
                 %li= link_to 'Add a Note', new_note_path
           = yield(:nav) if content_for(:nav)
           %li= link_to 'About', about_path

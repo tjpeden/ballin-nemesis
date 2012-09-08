@@ -1,5 +1,6 @@
 = simple_form_for @note, html: {class: 'form-horizontal'} do |f|
   = f.input :category_name, as: :autocomplete, source: categories_path
   = f.input :title
+  = f.input :star, :as => :boolean, :label => false, :inline_label => "Star this note?"
   = f.input :content, :as => :text
   = f.button :submit
